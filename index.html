@@ -1,39 +1,61 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>LA TV Shows | Home</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles">
-    <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafédex</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
-
 <body>
-    <header class="main-header">
-        <h1 class="title">LA TV Shows</h1>
-    </header>
-    <div id="card-container">
-        
+    <div class="entry-page" id="entryPage">
+        <div class="split-animation"></div>
+        <div class="grid-line-horizontal"></div>
+        <div class="grid-line-vertical"></div>
+        <div class="center">
+            <div class="circle" id="enterButton"></div>
+            <div class="detail_lights">
+                <div class="red"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
+            </div>
+        </div>     
     </div>
-    <div class="card" style="display: none;">
-        <div class="card-content">
-            <h2>TV Show Title</h2>
-            <img src="" alt="TV Show Poster">
-            <ul>
-                <li>Bullet Point 1</li>
-                <li>Bullet Point 2</li>
-                <li>Bullet Point 3</li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer">
-        <button onclick="quoteAlert();">
-            Get A Quote!
-        </button>
-        <button onclick="removeLastCard();">
-            Remove A Card!
-        </button>
-    </div>
-</body>
 
+    <div class="main-content" id="mainContent" style="display: none;">
+        <header>
+            <h1 class="dex-title" id="resetButton">Cafédex</h1>
+        </header>
+        <main>
+            <section id="species" class="dex-section">
+            <h2 class="dex-subtitle">Gotta Visit 'Em All!</h2>
+            <div class="dex-container">
+                <div class="dex-preview" id="cafeDetails">
+                    <h2 id="cafeName"></h2>
+                    <img id="cafeImage" class="cafe-image" src="" alt="Cafe Image">
+                    <p id="cafeLocation"></p>
+                    <p id="cafeAddress"></p>
+                    <p id="cafeDescription"></p>
+                </div>
+            <ul class="dex-list" id="cafeList">
+                <!-- List of cafes -->
+                </ul>
+                <nav>
+                    <ul>
+                    <li><a href="#" id="allLink">All</a></li>
+                    <li><a href="#" id="laLink">LA</a></li>
+                    <li><a href="#" id="ocLink">OC</a></li>
+                    <li><a href="#" id="pasadenaLink">Pasadena</a></li>
+                </ul>
+                </nav>
+            </div>
+            </section>
+            <section id="miniCardsGallery" class="mini-cards"></section>
+        </main>
+  <script src="script.js"></script>
+  <footer>
+    <p>&copy; 2024 Cafédex</p>
+  </footer>
+  </div>
+</body>
 </html>

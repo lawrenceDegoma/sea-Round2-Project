@@ -1,70 +1,457 @@
-html,
-body {
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('PressStart2P-Regular.ttf') format('truetype'); /* Specify .ttf format */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.entry-page {
+    background-color: #EE3333; /* Red background color */
+    color: #FFF; /* White text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transition: transform 1s ease;
+    z-index: 2;
+}
+
+.grid-line-vertical {
+    position: relative;
+    left: -70px; /* Position the vertical grid line at the center horizontally */
+    height: 100%;
+    width: 5px;
+    background-color: #000;
+    z-index: 0; /* Set z-index lower than circle for layering*/
+}
+
+
+.grid-line-horizontal {
+    position: absolute;
+    width: 100%; /* Adjust width as needed */
+    height: 3px; /* Adjust height as needed */
+    background-color: #000; 
+    z-index: 0;
+    top: 32%; /* Position at center vertically */
+    transform: translateY(-50%);
+}
+
+.hide {
+    transition: transform 2s ease;
+    transform: translateY(-100%); /* Slide the entry page up and away */
+}
+
+.hide .main-content {
+    opacity: 0; /* Make the main content invisible */
+    pointer-events: none; /* Disable pointer events */
+}
+
+.center {
+    text-align: center;
+}
+
+.circle {
+    width: 175px;
+    height: 175px;
+    background-color: #71baff; /* Blue circle color */
+    border-radius: 50%; /* Makes it a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: pulse 2s infinite alternate;
+    transition: transform 0.2s ease;
+    z-index: 2; 
+}
+
+.circle::before {
+    font-size: 24px;
+    text-align: center;
+    line-height: 290px;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.2) 60%);
+    border-radius: 50%; /* Makes it a circle */
+    animation: pulse 1s infinite alternate; /* Add animation */
+    z-index: 1;
+}
+
+.circle:hover {
+    transform: scale(1.1); /* Enlarge circle on hover */
+    animation: none; /* Stop the pulse animation on hover */
+    z-index: 2;
+}
+
+.circle span {
+    font-size: 24px;
+}
+
+.detail_lights {
+    position: absolute;
+    top: 400px; 
+    right: 80%;
+    left: calc(50% + 150px); 
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.detail_lights > div {
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%;
+    margin: 2px;
+    z-index: 1;
+}
+
+.red {
+    background-color: rgb(228, 20, 20);
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 213, 255, 0.7); /* Initial shadow */
+    }
+    100% {
+        box-shadow: 0 0 0 30px rgba(0, 255, 247, 0); /* Final shadow */
+    }
+}
+
+/* Keyframe animation for splitting the entry page */
+@keyframes split-circle {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0;
+    }
+}
+  
+/* Apply animation to the split-animation div */
+.split-animation{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background-color: #EE3333; 
+    z-index: 3; 
+    animation-name: split-circle;
+    animation-duration: 2s; 
+    animation-fill-mode: forwards;
+}
+
+
+.circle.animate-split {
+    animation-name: split-circle;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.entry-page::before,
+.entry-page::after {
+    content: '';
+    position: absolute;
+    width: 10px; 
+    height: 200px; 
+    border-top: 4px solid black; 
+    border-right: 4px solid black; 
+    border-radius: 50%;
+    transform: rotate(45deg); 
+    z-index: 1; 
+}
+
+.entry-page::before {
+    top: 0;
+    left: 0;
+}
+
+.entry-page::after {
+    bottom: 0;
+    right: 0;
+}
+
+.main-content {
+    /* Add transition for smooth visibility change */
+    transition: opacity 1s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; 
+    z-index: 1; 
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.hide {
+    opacity: 0; /* Make the entry page invisible */
+    pointer-events: none; /* Disable pointer events */
+}
+
+.move-left {
+    transform: translateX(-100%); /* Move the entry page to the left */
+}
+
+html, body{
+    width: 100vw; /* Viewport width */
+    height: 100vh; /* Viewport height */
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+
 }
 
-.main-header {
-    background-color: rgba(0, 0, 0, .3);
-    padding-bottom: 10px;
-}
-
-.title {
-    text-align: center;
+body, h1, h2, h3, ul, li {
     margin: 0;
-    font-size: 8em;
-    font-family: "Helvetica";
-    font-weight: normal;
-    color: white;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+    font-weight: bold;
 }
-
-#card-container {
+  
+/* Basic styling for the header */
+header {
+    background-color: #EE3333; /* Pokédex red */
+    color: #FFF;
+    padding: 10px 20px;
     display: flex;
-    justify-content: center;
-    margin: 20px;
+    justify-content: space-between;
+    align-items: center;
 }
-
-.card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 5px;
-}
-
-.card-content {
-    padding: 20px;
-    font-family: "Verdana";
-    color: #777;
-}
-
-.card-content h2 {
-    margin-top: 0;
-    font-size: 20px;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, .3);
-    padding: 10px;
-}
-
-button {
-    text-align: center;
-    background-color: #666;
-    border: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 40px;
-    border-radius: 10px;
-    color: white;
-    font-size: 22px;
+  
+.dex-title {
+    font-size: 24px;
     cursor: pointer;
-    margin: 5px;
+}
+  
+nav ul {
+    list-style-type: none;
+}
+  
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+  
+nav ul li a {
+    color: #FFF;
+    text-decoration: none;
+}
+  
+/* Basic styling for main content */
+main {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+  
+.dex-section {
+    position: relative;
+    margin-bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    margin-top: -40px;
+}
+  
+.dex-subtitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+  
+/* Basic styling for footer */
+footer {
+    background-color: #EE3333; /* Pokédex red */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #FFF;
+    padding: 10px;
+    text-align: center;
+}
+
+.dex-container {
+    display: flex;
+    grid-template-columns: repeat(16, 1fr);
+    grid-gap: 1px;
+    height: 400px;
+}
+
+.dex-preview {
+    flex: 1; /* Take up all available space */
+    padding-right: 20px; /* Add spacing between preview and list */
+    text-align: center;
+    margin-top: -10px;
+} 
+
+.dex-container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.dex-list {
+    position: relative;
+    width: calc(100%+115px);
+    padding-left: 25px;
+    padding-right: 10px;
+    margin-right: -55px;
+    flex: 1; /* Take up all available space */
+    overflow-y: auto; /* Add scroll if needed */
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px); 
+    max-height: 400px;
+    scrollbar-width: thin;
+    scrollbar-color: #5acbff;
+    height: 490px;
+    margin-left: 35px;
+    z-index: 1;
+}
+
+.dex-list li{
+    width: 100%;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    list-style-type: none;
+    margin-left: -15px;
+    margin-top: 15px;
+}
+
+.dex-list li:hover{
+    transform: scale(1.05);
+}
+  
+.dex-container div {
+    background-color: #FFF;
+    border: 1px solid #000;
+    height: 40px; 
+}
+
+#cafeName {
+    font-size: 20px; 
+}
+
+#cafeImage {
+    max-width: 100%;
+    max-height: 200px; /* Set maximum height for the image */
+    margin-top: 20px;
+}
+
+nav ul {
+    z-index: 2;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 25px;
+}
+
+nav ul li a {
+    position: relative;
+    color: #000000; 
+    text-decoration: none;
+    padding: 8px 16px; /* Add padding for better spacing */
+    border: 1px solid #000; /* Add border */
+    border-radius: 20px; /* Add border radius for rounded corners */
+    margin-top: -5px;
+    background-color: white;
+}
+
+nav ul li a:hover {
+    color: #000000;
+    text-decoration: none;
+    transform: scale(1.05);
+    font-weight: bold;
+}
+
+
+#cafeName {
+    font-size: 17px; 
+    text-align: center; 
+    margin-top: 10px; 
+}
+
+nav {
+    margin-top: -25px;
+    margin-left: -175px;
+}
+
+#allLink {
+    z-index: 3;
+}
+
+#cafeDescription{
+    font-size: 13px;
+}
+
+.cafe-cup {
+    height: 3em; /* Match the height of the font */
+    margin-right: 5px; /* Adjust for spacing */
+}
+
+.mini-cards-container {
+    position: relative;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%;
+    padding: 10px; /* Add padding to create space */
+    box-sizing: border-box;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+.mini-card {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px; /* Adjust width as needed */
+    min-width: 200px;
+    height: 300px;
+    display: inline-block; /* Ensures cards appear side by side */
+    vertical-align: top; /* Ensures cards align properly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    transition: transform 0.3 ease;
+}
+
+.mini-card:hover{
+    transform: scale(1.05);
+}
+
+.mini-cards {
+    display: flex; /* Ensure the cards are displayed in a row */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100vw;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: -7px;
+    font-size: 12px;
+    text-align: center;
+}
+  
+.mini-card img {
+    max-width: 100%; /* Ensure images resize appropriately */
+    max-height: 100%;
+    height: auto;
+    height: 100px;
+    width: 150px;
+    margin-top: 15px;
 }
