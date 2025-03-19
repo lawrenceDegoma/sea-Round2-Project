@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Blk Dot Coffee",
       description:
-        "Blk Dot offers a variety of traditional drinks along with an assortment of diverse drinks such as Vietnamese iced coffee and Thai tea. Would recommend as a grab an go spot as there isn't much seating. Rating: 8.5/10",
+        "Blk Dot offers a variety of traditional drinks along with an assortment of diverse drinks such as Vietnamese iced coffee and Thai tea. Would recommend as a grab an go spot as there isn't much seating. \nRating: 8.5/10",
       image:
         "https://images.squarespace-cdn.com/content/v1/61f9f5824087542a39e9c634/dbebec3d-ad41-45e0-98c2-8a069ef2def8/lychee-honey-oolong.jpg?format=1000w",
       location: "OC",
